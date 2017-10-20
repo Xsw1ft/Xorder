@@ -1,0 +1,11 @@
+.my_foods{
+	float: left;
+	width: 33%;
+	height: 25%;
+	text-align: center;
+	border: solid 1px #DDDDDD;
+	border-radius: 5px;
+}
+.my_btn{
+	text-align: center;
+}

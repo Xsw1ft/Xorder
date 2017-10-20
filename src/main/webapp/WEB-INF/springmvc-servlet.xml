@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       	xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       					   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+       					   http://www.springframework.org/schema/context
+       					   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       					   http://www.springframework.org/schema/mvc 
+       					   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:component-scan base-package="cn.xswift.xorder" />
+    <context:annotation-config />
+    <mvc:annotation-driven />
+ 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!--配置bean,配置后该类由spring管理--> 
+    <bean name="fs" class="cn.xswift.xorder.dao.FoodsSession"></bean> 
+    <bean name="us" class="cn.xswift.xorder.dao.UserSession"></bean>
+    <bean name="usi" class="cn.xswift.xorder.impl.UserServiceImpl"></bean> 
+    <bean name="fsi" class="cn.xswift.xorder.impl.FoodServiceImpl"></bean>
+    <bean name="fd" class="cn.xswift.xorder.entity.FoodsDetail"></bean> 
+    
+	<bean name="userController" class="cn.xswift.xorder.controller.UserController"> 
+		<!--(1)依赖注入,配置当前类中相应的属性-->
+		<property name="usi" ref="usi" ></property> 
+		<property name="fs" ref="fs"></property> 
+	</bean> 
+	<bean name="foodsController" class="cn.xswift.xorder.controller.FoodsController"> 
+		<!--(1)依赖注入,配置当前类中相应的属性--> 
+		<property name="fsi" ref="fsi"></property> 
+		<property name="fd" ref="fd"></property> 
+	</bean> 
+	<bean name="UserServiceImpl" class="cn.xswift.xorder.impl.UserServiceImpl"> 
+		<!--(1)依赖注入,配置当前类中相应的属性--> 
+		<property name="us" ref="us"></property> 
+	</bean> 
+	<bean name="FoodServiceImpl" class="cn.xswift.xorder.impl.FoodServiceImpl"> 
+		<!--(1)依赖注入,配置当前类中相应的属性--> 
+		<property name="fs" ref="fs"></property> 
+	</bean> 
+</beans>
